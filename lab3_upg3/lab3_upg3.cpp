@@ -1,105 +1,59 @@
-#include <iostream>
-#include <string>
+// lab3_upg3.cpp
+// Program för att kryptera och dekryptera en sträng
+// Thomas Nordenmark 2013-12-02
+// Ver 0.1
+//------------------------------------------------------------------------------
+#include <iostream> // cin, cout
+#include <string> // string
 using namespace std;
 
 int main()
 {
-    string input;
-    int count = 0;
+    string input; // Originalsträngen
+    int i = 0; // Iterator för loopar
+    int multiple = 0; // Multipel för att hålla ordning på var femte iteration
+    int rot13 = 13; // Rot13-nyckeln
+    int rot7 = 7; // Rot7-nyckeln
+    int key = rot13; // Nyckel som byter till rot13 respektive rot7 var femte iteration
 
-    cout << "Enter your phrase: \n";
-    getline(cin, input);
+    cout << "Mata in en mening: " << flush; // Ledtext är skoj, flusha buffern
+    getline(cin, input); // Be användaren mata in en text
 
-    string crypto = input;
 
-    for (count = 0; count < crypto.length(); count++)
+    string crypto = input; // Ny temporär sträng att arbeta med
+
+    for (i = 0; i < (int)crypto.length(); i++) // Loop för kryptering
     {
-        if (isalpha(crypto[count]))
-        {
-            crypto[count] = tolower(crypto[count]);
-            for (int i = 0; i < 13; i++)
-            {
-                if (crypto[count] == 'z')
-                    crypto[count] = 'a';
-                else
-                    crypto[count]++;
-            }
-        }
+        // Om multiplen är ett tal delbart med fem utan rest och det inte är första tecknet, byt nyckel
+        if((multiple = ((i % 5) == 0)) && (i != 0)  && (key == rot13))
+            key = rot7;
+        else if((multiple = ((i % 5) == 0)) && (i != 0)  && (key == rot7))
+            key = rot13;
+
+        crypto[i] += key; // Fyll på strängen med de krypterade värdena
     }
 
-    cout << "Results: " << crypto << endl;
+    // Skriv ut originalet samt den krypterade texten
+    cout << endl << "Originaltext: " << input << endl;
+    cout << "Krypterad: " << crypto << endl << endl;
+
+    // Nollställ nyckeln till rot13, annars hamnar vi längre och längre från svaret
+    key = rot13;
+
+    for (i = 0; i < (int)crypto.length(); i++) // Loop för dekryptering, bak och fram!
+    {
+        // Om multiplen är ett tal delbart med fem utan rest och det inte är första tecknet, byt nyckel
+        if((multiple = ((i % 5) == 0)) && (i != 0)  && (key == rot13))
+            key = rot7;
+        else if((multiple = ((i % 5) == 0)) && (i != 0)  && (key == rot7))
+            key = rot13;
+
+        crypto[i] -= key; // Fyll på strängen med de dekrypterade värdena
+    }
+
+    // Skriv ut den dekrypterade texten
+    cout << "Dekrypterad: " << crypto << endl;
 
 
-
-
+    return 0;
 }
-
-//    for(int i = 0; i < (int)crypto.length(); i++)
-//    {
-//        count ++;
-
-//        //if it is a multiple of 5 not the first character change the key
-//        if((multiple = ((i % 5) == 0)) && (count != 1)  && (key == rot13))
-//        {
-//            key = rot7;
-//        }
-
-//        //if it is a multiple of 5 not the first character change the key
-//        else if((multiple = ((i % 5) == 0)) && (count != 1) && (key == rot7))
-//        {
-//            key = rot13;
-//        }
-
-////        if((crypto[i] >= 32) && (crypto[i] <= 255))
-////        {
-//            if (crypto[i] + key > 255)
-//            {
-//                crypto[i] = ((crypto[i] + key) % 255 ) + 32;
-//            }
-//            else
-//            {
-//                crypto[i] += key;
-//            }
-//        //}
-//    }
-
-
-//    cout << "Originaltext: " << text << endl;
-//    cout << "Krypterad text: " << crypto << endl;
-
-
-//    for(int i = 0; i < (int)crypto.length(); i++)
-//    {
-
-//        count ++;
-
-//        //if it is a multiple of 5 not the first character change the key
-//        if((multiple = ((i % 5) == 0)) && (count != 1)  && (key == rot13))
-//        {
-//            key = rot7;
-//        }
-
-//        //if it is a multiple of 5 not the first character change the key
-//        else if((multiple = ((i % 5) == 0)) && (count != 1) && (key == rot7))
-//        {
-//            key = rot13;
-//        }
-
-//        if((crypto[i] >= 32) && (crypto[i] <= 255))
-//        {
-//            if (crypto[i] + key > 255)
-//            {
-//                crypto[i] = ((crypto[i] - key) % 255 ) + 32;
-//            }
-//            else
-//            {
-//                crypto[i] -= key;
-//            }
-//        }
-//    }
-
-//    cout << "Dekrypterad text: " << crypto << endl;
-//    cout << (int)'z' << endl;
-
-//    return 0;
-//}

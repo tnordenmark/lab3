@@ -1,6 +1,6 @@
-// lab2_upg1.cpp
+// lab3_upg2.cpp
 // Program för att sortera namn i bokstavsordning
-// Thomas Nordenmark 2013-11-24
+// Thomas Nordenmark 2013-11-28
 // Ver 0.1
 //------------------------------------------------------------------------------
 #include <iostream> // cin, cout
