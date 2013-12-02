@@ -10,11 +10,14 @@ using namespace std;
 
 int main()
 {
+    // Strängar lagra de splittade namnen i
     string fnamn1, fnamn2, fnamn3, enamn1, enamn2, enamn3;
+    // Originalnamnen
     string namn1, namn2, namn3;
+    // Temporära strängar att lagra namnen med gemener i
     string namnlc1, namnlc2, namnlc3;
+    // Temporära strängar att lagra namnen baklänges för sortering
     string revnamn1, revnamn2, revnamn3;
-    unsigned int i;
 
     cout << "Mata in tre namn i formatet Förnamn <mellanslag> Efternamn, ett på varje rad:" << endl;
 
@@ -26,7 +29,7 @@ int main()
     // Kopiera namn1 till en temporär sträng att arbeta med
     namnlc1 = namn1;
     // Konvertera den temporära strängen till gemener
-    for(i = 0; i < namnlc1.length(); i++)
+    for(int i = 0; i < (int)namnlc1.length(); i++)
     {
         namnlc1[i] = tolower(namnlc1[i]);
     }
@@ -45,7 +48,7 @@ int main()
     // Kopiera namn1 till en temporär sträng att arbeta med
     namnlc2 = namn2;
     // Konvertera den temporära strängen till gemener
-    for(i = 0; i < namnlc2.length(); i++)
+    for(int i = 0; i < (int)namnlc2.length(); i++)
     {
         namnlc2[i] = tolower(namnlc2[i]);
     }
@@ -64,7 +67,7 @@ int main()
     // Kopiera namn1 till en temporär sträng att arbeta med
     namnlc3 = namn3;
     // Konvertera den temporära strängen till gemener
-    for(i = 0; i < namnlc3.length(); i++)
+    for(int i = 0; i < (int)namnlc3.length(); i++)
     {
         namnlc3[i] = tolower(namnlc3[i]);
     }
